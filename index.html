@@ -20,10 +20,13 @@
 	<div style="display:none">
 		<div class="shape">I LOVE YOU</div>
         	<div class="shape"> 微微</div>
-		<div class="shape">加油</div>
+		<div class="shape">我们要</div>
 		<div class="shape">一起拼搏</div>
         	<div class="shape">一起努力</div>
-        	<div class="shape">还有 早生贵子</div>
+		<div class="shape">一起生活</div>
+		<div class="shape">最后</div>
+        	<div class="shape">还要有</div>
+		div class="shape">早生贵子</div>
 	</div>
 	<script>
 		var canvas = document.getElementById("cas");
@@ -34,24 +37,21 @@
 		ocas.height = canvas.height = window.innerHeight;
 		var bigbooms = [];
 	
+		var index_shape=0;
 		window.onload = function(){
 			initAnimate()
 		}
-
 		function initAnimate(){
 			drawBg();
-
 			lastTime = new Date();
 			animate();
 		}
-
 		var lastTime;
 		function animate(){
 			ctx.save();
 			ctx.fillStyle = "rgba(0,5,24,0.1)";
 			ctx.fillRect(0,0,canvas.width,canvas.height);
 			ctx.restore();
-
 <!---   调节烟花的时间代码 ----->
 			var newTime = new Date();
             if(newTime-lastTime>500+(window.innerHeight-767)/2){
@@ -63,17 +63,21 @@
 					bigbooms.push(bigboom)
 				}
 				else {
-					var bigboom = new Boom(getRandom(canvas.width/3,canvas.width*2/3) ,2,"#FFF" , {x:canvas.width/2 , y:200} , document.querySelectorAll(".shape")[parseInt(getRandom(0, document.querySelectorAll(".shape").length))]);
+					var bigboom = new Boom(getRandom(canvas.width/3,canvas.width*2/3) ,
+						  					2,
+											"#FFF" ,
+											 {x:canvas.width/2 , y:200} , 
+											 document.querySelectorAll(".shape")[index_shape]
+						 );
+					index_shape=(index_shape+1)% document.querySelectorAll(".shape").length;
 					bigbooms.push(bigboom)
 				}
 				lastTime = newTime;
 				console.log(bigbooms)
 			}
-
 			stars.foreach(function(){
 				this.paint();
 			})
-
 			drawMoon();
 
 			bigbooms.foreach(function(index){
